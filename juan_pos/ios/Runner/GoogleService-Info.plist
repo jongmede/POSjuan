@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>980881619018-ic4grtai1na3rmtsmp21fqkdj7eh6grc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.980881619018-ic4grtai1na3rmtsmp21fqkdj7eh6grc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDVine5Rmp6d7jx4pwfeDN8pczw324hNAc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>980881619018</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.juanpos</string>
+	<key>PROJECT_ID</key>
+	<string>juanpos-131cc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>juanpos-131cc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:980881619018:ios:4de3ce312ab6e6c32a0eb3</string>
+	<key>DATABASE_URL</key>
+	<string>https://juanpos-131cc-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
