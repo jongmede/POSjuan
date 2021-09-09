@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'juanpos',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: kcPrimaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,

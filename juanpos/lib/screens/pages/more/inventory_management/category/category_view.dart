@@ -82,6 +82,7 @@ class CategoryView extends StatelessWidget {
                                     ),
                                   )),
               floatingActionButton: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   await showDialog(
                       context: context,

@@ -93,6 +93,8 @@ class UpdateCategoryView extends StatelessWidget with $UpdateCategoryView {
                                                 categoryName:
                                                     model.category.categoryName,
                                                 color: e.value);
+                                                model.selectedColor = e;
+
                                             model.notifyListeners();
                                           },
                                           child: Container(

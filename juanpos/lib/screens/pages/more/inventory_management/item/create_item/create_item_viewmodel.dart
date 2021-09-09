@@ -46,9 +46,7 @@ class CreateItemViewModel extends FormViewModel {
   }
 
   @override
-  void setFormStatus() {
-    // TODO: implement setFormStatus
-  }
+  void setFormStatus() {}
 
   Future syncCategory() async {
     try {

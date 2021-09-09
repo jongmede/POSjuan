@@ -105,6 +105,7 @@ class SupplierView extends StatelessWidget {
                                     ),
                                   )),
               floatingActionButton: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   await model.navigateToCreateSupplier();
                   model.notifyListeners();

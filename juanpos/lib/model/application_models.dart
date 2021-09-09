@@ -102,6 +102,7 @@ abstract class Item with _$Item {
     String? description,
     String? productCode,
     String? category,
+    
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

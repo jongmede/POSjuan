@@ -108,6 +108,7 @@ class CustomerView extends StatelessWidget {
                                     ),
                                   )),
               floatingActionButton: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   await model.navigateToCreateCustomer();
                   model.notifyListeners();

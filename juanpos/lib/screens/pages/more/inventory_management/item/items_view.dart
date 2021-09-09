@@ -23,63 +23,81 @@ class ItemsView extends StatelessWidget {
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [Center(child: Text("No items added", textAlign: TextAlign.center,))],
+                              children: [
+                                Center(
+                                    child: Text(
+                                  "No items added",
+                                  textAlign: TextAlign.center,
+                                ))
+                              ],
                             )
                           : ListView.builder(
                               itemCount: model.items!.length,
                               itemBuilder: (context, index) => Padding(
-                                    padding: const EdgeInsets.fromLTRB(8,4,8,4),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(8, 4, 8, 4),
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all()
-                                      ),
-                                      child: Row(children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            padding: EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(),
-                                              shape: BoxShape.circle
+                                      decoration:
+                                          BoxDecoration(border: Border.all()),
+                                      child: ExpansionTile(
+                                        title: Row(children: [
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                padding: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(),
+                                                    shape: BoxShape.circle),
+                                                child: Image.asset(
+                                                    "asset/images/Add Image.png"),
+                                              )),
+                                          Expanded(
+                                            child: Text(
+                                              (model.items![index])
+                                                  .productName!,
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 18,
+                                                  fontWeight:
+                                                      FontWeight.normal),
                                             ),
-                                            child: Image.asset("asset/images/Add Image.png"),
-                                          )
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            (model.items![index]).productName!,
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.normal),
                                           ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () async {
-                                            await showDialog(
-                                                context: context,
-                                                builder: (context) => DeleteItemView(item: model.items![index],));
-                                            model.notifyListeners();
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                                "asset/images/Trash.png"),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: GestureDetector(
+                                          GestureDetector(
                                             onTap: () async {
-                                              await model.navigateToUpdateItem((model.items![index]));
+                                              await showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      DeleteItemView(
+                                                        item:
+                                                            model.items![index],
+                                                      ));
+                                              model.notifyListeners();
                                             },
-                                            child: Image.asset(
-                                                "asset/images/Edit.png"),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Image.asset(
+                                                  "asset/images/Trash.png"),
+                                            ),
                                           ),
-                                        )
-                                      ]),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: GestureDetector(
+                                              onTap: () async {
+                                                await model
+                                                    .navigateToUpdateItem(
+                                                        (model.items![index]));
+                                              },
+                                              child: Image.asset(
+                                                  "asset/images/Edit.png"),
+                                            ),
+                                          )
+                                        ]),
+                                      ),
                                     ),
                                   )),
               floatingActionButton: FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
                 onPressed: () async {
                   await model.navigateToCreateItem();
                   model.notifyListeners();

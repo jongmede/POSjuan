@@ -106,6 +106,7 @@ class BusinessView extends StatelessWidget {
                 ),
               )),
           floatingActionButton: FloatingActionButton(
+            backgroundColor: Theme.of(context).primaryColor,
             onPressed: () async {
               await model.navigateToCreateBusiness();
               model.notifyListeners();
