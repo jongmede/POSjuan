@@ -1256,32 +1256,32 @@ class _$ItemVariantTearOff {
 
   _ItemVariant call(
       {required String id,
-      required String itemId,
-      required String productVariantName,
-      required double productVariantPrice,
-      required double productVariantCost,
-      required double? productVariantDiscount,
-      required bool isProductVariantDiscount,
-      String? productVariantDescription,
-      required String productVariantCode,
-      required double productVariantTax,
-      required bool isProductVariantTax,
-      String? internalNote,
-      required Map<String, bool> productVariantDiscountType}) {
+      required String prodID,
+      required String name,
+      required double price,
+      required double cost,
+      required double discount,
+      String? description,
+      required String prodCode,
+      String? image,
+      String? inventoryLink,
+      required bool discount_SC,
+      required bool discount_PWD,
+      required bool discount_Spl}) {
     return _ItemVariant(
       id: id,
-      itemId: itemId,
-      productVariantName: productVariantName,
-      productVariantPrice: productVariantPrice,
-      productVariantCost: productVariantCost,
-      productVariantDiscount: productVariantDiscount,
-      isProductVariantDiscount: isProductVariantDiscount,
-      productVariantDescription: productVariantDescription,
-      productVariantCode: productVariantCode,
-      productVariantTax: productVariantTax,
-      isProductVariantTax: isProductVariantTax,
-      internalNote: internalNote,
-      productVariantDiscountType: productVariantDiscountType,
+      prodID: prodID,
+      name: name,
+      price: price,
+      cost: cost,
+      discount: discount,
+      description: description,
+      prodCode: prodCode,
+      image: image,
+      inventoryLink: inventoryLink,
+      discount_SC: discount_SC,
+      discount_PWD: discount_PWD,
+      discount_Spl: discount_Spl,
     );
   }
 
@@ -1296,19 +1296,21 @@ const $ItemVariant = _$ItemVariantTearOff();
 /// @nodoc
 mixin _$ItemVariant {
   String get id => throw _privateConstructorUsedError;
-  String get itemId => throw _privateConstructorUsedError;
-  String get productVariantName => throw _privateConstructorUsedError;
-  double get productVariantPrice => throw _privateConstructorUsedError;
-  double get productVariantCost => throw _privateConstructorUsedError;
-  double? get productVariantDiscount => throw _privateConstructorUsedError;
-  bool get isProductVariantDiscount => throw _privateConstructorUsedError;
-  String? get productVariantDescription => throw _privateConstructorUsedError;
-  String get productVariantCode => throw _privateConstructorUsedError;
-  double get productVariantTax => throw _privateConstructorUsedError;
-  bool get isProductVariantTax => throw _privateConstructorUsedError;
-  String? get internalNote => throw _privateConstructorUsedError;
-  Map<String, bool> get productVariantDiscountType =>
-      throw _privateConstructorUsedError;
+  String get prodID => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
+  double get discount => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String get prodCode => throw _privateConstructorUsedError;
+  String? get image =>
+      throw _privateConstructorUsedError; // required double productVariantTax,
+// required bool isProductVariantTax,
+// String? internalNote,
+  String? get inventoryLink => throw _privateConstructorUsedError;
+  bool get discount_SC => throw _privateConstructorUsedError;
+  bool get discount_PWD => throw _privateConstructorUsedError;
+  bool get discount_Spl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1323,18 +1325,18 @@ abstract class $ItemVariantCopyWith<$Res> {
       _$ItemVariantCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String itemId,
-      String productVariantName,
-      double productVariantPrice,
-      double productVariantCost,
-      double? productVariantDiscount,
-      bool isProductVariantDiscount,
-      String? productVariantDescription,
-      String productVariantCode,
-      double productVariantTax,
-      bool isProductVariantTax,
-      String? internalNote,
-      Map<String, bool> productVariantDiscountType});
+      String prodID,
+      String name,
+      double price,
+      double cost,
+      double discount,
+      String? description,
+      String prodCode,
+      String? image,
+      String? inventoryLink,
+      bool discount_SC,
+      bool discount_PWD,
+      bool discount_Spl});
 }
 
 /// @nodoc
@@ -1348,72 +1350,72 @@ class _$ItemVariantCopyWithImpl<$Res> implements $ItemVariantCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? itemId = freezed,
-    Object? productVariantName = freezed,
-    Object? productVariantPrice = freezed,
-    Object? productVariantCost = freezed,
-    Object? productVariantDiscount = freezed,
-    Object? isProductVariantDiscount = freezed,
-    Object? productVariantDescription = freezed,
-    Object? productVariantCode = freezed,
-    Object? productVariantTax = freezed,
-    Object? isProductVariantTax = freezed,
-    Object? internalNote = freezed,
-    Object? productVariantDiscountType = freezed,
+    Object? prodID = freezed,
+    Object? name = freezed,
+    Object? price = freezed,
+    Object? cost = freezed,
+    Object? discount = freezed,
+    Object? description = freezed,
+    Object? prodCode = freezed,
+    Object? image = freezed,
+    Object? inventoryLink = freezed,
+    Object? discount_SC = freezed,
+    Object? discount_PWD = freezed,
+    Object? discount_Spl = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      itemId: itemId == freezed
-          ? _value.itemId
-          : itemId // ignore: cast_nullable_to_non_nullable
+      prodID: prodID == freezed
+          ? _value.prodID
+          : prodID // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantName: productVariantName == freezed
-          ? _value.productVariantName
-          : productVariantName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantPrice: productVariantPrice == freezed
-          ? _value.productVariantPrice
-          : productVariantPrice // ignore: cast_nullable_to_non_nullable
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as double,
-      productVariantCost: productVariantCost == freezed
-          ? _value.productVariantCost
-          : productVariantCost // ignore: cast_nullable_to_non_nullable
+      cost: cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      productVariantDiscount: productVariantDiscount == freezed
-          ? _value.productVariantDiscount
-          : productVariantDiscount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isProductVariantDiscount: isProductVariantDiscount == freezed
-          ? _value.isProductVariantDiscount
-          : isProductVariantDiscount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      productVariantDescription: productVariantDescription == freezed
-          ? _value.productVariantDescription
-          : productVariantDescription // ignore: cast_nullable_to_non_nullable
+      discount: discount == freezed
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      productVariantCode: productVariantCode == freezed
-          ? _value.productVariantCode
-          : productVariantCode // ignore: cast_nullable_to_non_nullable
+      prodCode: prodCode == freezed
+          ? _value.prodCode
+          : prodCode // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantTax: productVariantTax == freezed
-          ? _value.productVariantTax
-          : productVariantTax // ignore: cast_nullable_to_non_nullable
-              as double,
-      isProductVariantTax: isProductVariantTax == freezed
-          ? _value.isProductVariantTax
-          : isProductVariantTax // ignore: cast_nullable_to_non_nullable
-              as bool,
-      internalNote: internalNote == freezed
-          ? _value.internalNote
-          : internalNote // ignore: cast_nullable_to_non_nullable
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      productVariantDiscountType: productVariantDiscountType == freezed
-          ? _value.productVariantDiscountType
-          : productVariantDiscountType // ignore: cast_nullable_to_non_nullable
-              as Map<String, bool>,
+      inventoryLink: inventoryLink == freezed
+          ? _value.inventoryLink
+          : inventoryLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      discount_SC: discount_SC == freezed
+          ? _value.discount_SC
+          : discount_SC // ignore: cast_nullable_to_non_nullable
+              as bool,
+      discount_PWD: discount_PWD == freezed
+          ? _value.discount_PWD
+          : discount_PWD // ignore: cast_nullable_to_non_nullable
+              as bool,
+      discount_Spl: discount_Spl == freezed
+          ? _value.discount_Spl
+          : discount_Spl // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1427,18 +1429,18 @@ abstract class _$ItemVariantCopyWith<$Res>
   @override
   $Res call(
       {String id,
-      String itemId,
-      String productVariantName,
-      double productVariantPrice,
-      double productVariantCost,
-      double? productVariantDiscount,
-      bool isProductVariantDiscount,
-      String? productVariantDescription,
-      String productVariantCode,
-      double productVariantTax,
-      bool isProductVariantTax,
-      String? internalNote,
-      Map<String, bool> productVariantDiscountType});
+      String prodID,
+      String name,
+      double price,
+      double cost,
+      double discount,
+      String? description,
+      String prodCode,
+      String? image,
+      String? inventoryLink,
+      bool discount_SC,
+      bool discount_PWD,
+      bool discount_Spl});
 }
 
 /// @nodoc
@@ -1454,72 +1456,72 @@ class __$ItemVariantCopyWithImpl<$Res> extends _$ItemVariantCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? itemId = freezed,
-    Object? productVariantName = freezed,
-    Object? productVariantPrice = freezed,
-    Object? productVariantCost = freezed,
-    Object? productVariantDiscount = freezed,
-    Object? isProductVariantDiscount = freezed,
-    Object? productVariantDescription = freezed,
-    Object? productVariantCode = freezed,
-    Object? productVariantTax = freezed,
-    Object? isProductVariantTax = freezed,
-    Object? internalNote = freezed,
-    Object? productVariantDiscountType = freezed,
+    Object? prodID = freezed,
+    Object? name = freezed,
+    Object? price = freezed,
+    Object? cost = freezed,
+    Object? discount = freezed,
+    Object? description = freezed,
+    Object? prodCode = freezed,
+    Object? image = freezed,
+    Object? inventoryLink = freezed,
+    Object? discount_SC = freezed,
+    Object? discount_PWD = freezed,
+    Object? discount_Spl = freezed,
   }) {
     return _then(_ItemVariant(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      itemId: itemId == freezed
-          ? _value.itemId
-          : itemId // ignore: cast_nullable_to_non_nullable
+      prodID: prodID == freezed
+          ? _value.prodID
+          : prodID // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantName: productVariantName == freezed
-          ? _value.productVariantName
-          : productVariantName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantPrice: productVariantPrice == freezed
-          ? _value.productVariantPrice
-          : productVariantPrice // ignore: cast_nullable_to_non_nullable
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as double,
-      productVariantCost: productVariantCost == freezed
-          ? _value.productVariantCost
-          : productVariantCost // ignore: cast_nullable_to_non_nullable
+      cost: cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
               as double,
-      productVariantDiscount: productVariantDiscount == freezed
-          ? _value.productVariantDiscount
-          : productVariantDiscount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isProductVariantDiscount: isProductVariantDiscount == freezed
-          ? _value.isProductVariantDiscount
-          : isProductVariantDiscount // ignore: cast_nullable_to_non_nullable
-              as bool,
-      productVariantDescription: productVariantDescription == freezed
-          ? _value.productVariantDescription
-          : productVariantDescription // ignore: cast_nullable_to_non_nullable
+      discount: discount == freezed
+          ? _value.discount
+          : discount // ignore: cast_nullable_to_non_nullable
+              as double,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      productVariantCode: productVariantCode == freezed
-          ? _value.productVariantCode
-          : productVariantCode // ignore: cast_nullable_to_non_nullable
+      prodCode: prodCode == freezed
+          ? _value.prodCode
+          : prodCode // ignore: cast_nullable_to_non_nullable
               as String,
-      productVariantTax: productVariantTax == freezed
-          ? _value.productVariantTax
-          : productVariantTax // ignore: cast_nullable_to_non_nullable
-              as double,
-      isProductVariantTax: isProductVariantTax == freezed
-          ? _value.isProductVariantTax
-          : isProductVariantTax // ignore: cast_nullable_to_non_nullable
-              as bool,
-      internalNote: internalNote == freezed
-          ? _value.internalNote
-          : internalNote // ignore: cast_nullable_to_non_nullable
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      productVariantDiscountType: productVariantDiscountType == freezed
-          ? _value.productVariantDiscountType
-          : productVariantDiscountType // ignore: cast_nullable_to_non_nullable
-              as Map<String, bool>,
+      inventoryLink: inventoryLink == freezed
+          ? _value.inventoryLink
+          : inventoryLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      discount_SC: discount_SC == freezed
+          ? _value.discount_SC
+          : discount_SC // ignore: cast_nullable_to_non_nullable
+              as bool,
+      discount_PWD: discount_PWD == freezed
+          ? _value.discount_PWD
+          : discount_PWD // ignore: cast_nullable_to_non_nullable
+              as bool,
+      discount_Spl: discount_Spl == freezed
+          ? _value.discount_Spl
+          : discount_Spl // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1529,18 +1531,18 @@ class __$ItemVariantCopyWithImpl<$Res> extends _$ItemVariantCopyWithImpl<$Res>
 class _$_ItemVariant implements _ItemVariant {
   _$_ItemVariant(
       {required this.id,
-      required this.itemId,
-      required this.productVariantName,
-      required this.productVariantPrice,
-      required this.productVariantCost,
-      required this.productVariantDiscount,
-      required this.isProductVariantDiscount,
-      this.productVariantDescription,
-      required this.productVariantCode,
-      required this.productVariantTax,
-      required this.isProductVariantTax,
-      this.internalNote,
-      required this.productVariantDiscountType});
+      required this.prodID,
+      required this.name,
+      required this.price,
+      required this.cost,
+      required this.discount,
+      this.description,
+      required this.prodCode,
+      this.image,
+      this.inventoryLink,
+      required this.discount_SC,
+      required this.discount_PWD,
+      required this.discount_Spl});
 
   factory _$_ItemVariant.fromJson(Map<String, dynamic> json) =>
       _$_$_ItemVariantFromJson(json);
@@ -1548,33 +1550,35 @@ class _$_ItemVariant implements _ItemVariant {
   @override
   final String id;
   @override
-  final String itemId;
+  final String prodID;
   @override
-  final String productVariantName;
+  final String name;
   @override
-  final double productVariantPrice;
+  final double price;
   @override
-  final double productVariantCost;
+  final double cost;
   @override
-  final double? productVariantDiscount;
+  final double discount;
   @override
-  final bool isProductVariantDiscount;
+  final String? description;
   @override
-  final String? productVariantDescription;
+  final String prodCode;
   @override
-  final String productVariantCode;
+  final String? image;
+  @override // required double productVariantTax,
+// required bool isProductVariantTax,
+// String? internalNote,
+  final String? inventoryLink;
   @override
-  final double productVariantTax;
+  final bool discount_SC;
   @override
-  final bool isProductVariantTax;
+  final bool discount_PWD;
   @override
-  final String? internalNote;
-  @override
-  final Map<String, bool> productVariantDiscountType;
+  final bool discount_Spl;
 
   @override
   String toString() {
-    return 'ItemVariant(id: $id, itemId: $itemId, productVariantName: $productVariantName, productVariantPrice: $productVariantPrice, productVariantCost: $productVariantCost, productVariantDiscount: $productVariantDiscount, isProductVariantDiscount: $isProductVariantDiscount, productVariantDescription: $productVariantDescription, productVariantCode: $productVariantCode, productVariantTax: $productVariantTax, isProductVariantTax: $isProductVariantTax, internalNote: $internalNote, productVariantDiscountType: $productVariantDiscountType)';
+    return 'ItemVariant(id: $id, prodID: $prodID, name: $name, price: $price, cost: $cost, discount: $discount, description: $description, prodCode: $prodCode, image: $image, inventoryLink: $inventoryLink, discount_SC: $discount_SC, discount_PWD: $discount_PWD, discount_Spl: $discount_Spl)';
   }
 
   @override
@@ -1583,64 +1587,55 @@ class _$_ItemVariant implements _ItemVariant {
         (other is _ItemVariant &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.itemId, itemId) ||
-                const DeepCollectionEquality().equals(other.itemId, itemId)) &&
-            (identical(other.productVariantName, productVariantName) ||
+            (identical(other.prodID, prodID) ||
+                const DeepCollectionEquality().equals(other.prodID, prodID)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.price, price) ||
+                const DeepCollectionEquality().equals(other.price, price)) &&
+            (identical(other.cost, cost) ||
+                const DeepCollectionEquality().equals(other.cost, cost)) &&
+            (identical(other.discount, discount) ||
                 const DeepCollectionEquality()
-                    .equals(other.productVariantName, productVariantName)) &&
-            (identical(other.productVariantPrice, productVariantPrice) ||
+                    .equals(other.discount, discount)) &&
+            (identical(other.description, description) ||
                 const DeepCollectionEquality()
-                    .equals(other.productVariantPrice, productVariantPrice)) &&
-            (identical(other.productVariantCost, productVariantCost) ||
+                    .equals(other.description, description)) &&
+            (identical(other.prodCode, prodCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.productVariantCost, productVariantCost)) &&
-            (identical(other.productVariantDiscount, productVariantDiscount) ||
-                const DeepCollectionEquality().equals(
-                    other.productVariantDiscount, productVariantDiscount)) &&
-            (identical(
-                    other.isProductVariantDiscount, isProductVariantDiscount) ||
-                const DeepCollectionEquality().equals(
-                    other.isProductVariantDiscount,
-                    isProductVariantDiscount)) &&
-            (identical(other.productVariantDescription, productVariantDescription) ||
-                const DeepCollectionEquality().equals(
-                    other.productVariantDescription,
-                    productVariantDescription)) &&
-            (identical(other.productVariantCode, productVariantCode) ||
+                    .equals(other.prodCode, prodCode)) &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)) &&
+            (identical(other.inventoryLink, inventoryLink) ||
                 const DeepCollectionEquality()
-                    .equals(other.productVariantCode, productVariantCode)) &&
-            (identical(other.productVariantTax, productVariantTax) ||
+                    .equals(other.inventoryLink, inventoryLink)) &&
+            (identical(other.discount_SC, discount_SC) ||
                 const DeepCollectionEquality()
-                    .equals(other.productVariantTax, productVariantTax)) &&
-            (identical(other.isProductVariantTax, isProductVariantTax) ||
+                    .equals(other.discount_SC, discount_SC)) &&
+            (identical(other.discount_PWD, discount_PWD) ||
                 const DeepCollectionEquality()
-                    .equals(other.isProductVariantTax, isProductVariantTax)) &&
-            (identical(other.internalNote, internalNote) ||
+                    .equals(other.discount_PWD, discount_PWD)) &&
+            (identical(other.discount_Spl, discount_Spl) ||
                 const DeepCollectionEquality()
-                    .equals(other.internalNote, internalNote)) &&
-            (identical(other.productVariantDiscountType,
-                    productVariantDiscountType) ||
-                const DeepCollectionEquality().equals(
-                    other.productVariantDiscountType,
-                    productVariantDiscountType)));
+                    .equals(other.discount_Spl, discount_Spl)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(itemId) ^
-      const DeepCollectionEquality().hash(productVariantName) ^
-      const DeepCollectionEquality().hash(productVariantPrice) ^
-      const DeepCollectionEquality().hash(productVariantCost) ^
-      const DeepCollectionEquality().hash(productVariantDiscount) ^
-      const DeepCollectionEquality().hash(isProductVariantDiscount) ^
-      const DeepCollectionEquality().hash(productVariantDescription) ^
-      const DeepCollectionEquality().hash(productVariantCode) ^
-      const DeepCollectionEquality().hash(productVariantTax) ^
-      const DeepCollectionEquality().hash(isProductVariantTax) ^
-      const DeepCollectionEquality().hash(internalNote) ^
-      const DeepCollectionEquality().hash(productVariantDiscountType);
+      const DeepCollectionEquality().hash(prodID) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(price) ^
+      const DeepCollectionEquality().hash(cost) ^
+      const DeepCollectionEquality().hash(discount) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(prodCode) ^
+      const DeepCollectionEquality().hash(image) ^
+      const DeepCollectionEquality().hash(inventoryLink) ^
+      const DeepCollectionEquality().hash(discount_SC) ^
+      const DeepCollectionEquality().hash(discount_PWD) ^
+      const DeepCollectionEquality().hash(discount_Spl);
 
   @JsonKey(ignore: true)
   @override
@@ -1656,18 +1651,18 @@ class _$_ItemVariant implements _ItemVariant {
 abstract class _ItemVariant implements ItemVariant {
   factory _ItemVariant(
       {required String id,
-      required String itemId,
-      required String productVariantName,
-      required double productVariantPrice,
-      required double productVariantCost,
-      required double? productVariantDiscount,
-      required bool isProductVariantDiscount,
-      String? productVariantDescription,
-      required String productVariantCode,
-      required double productVariantTax,
-      required bool isProductVariantTax,
-      String? internalNote,
-      required Map<String, bool> productVariantDiscountType}) = _$_ItemVariant;
+      required String prodID,
+      required String name,
+      required double price,
+      required double cost,
+      required double discount,
+      String? description,
+      required String prodCode,
+      String? image,
+      String? inventoryLink,
+      required bool discount_SC,
+      required bool discount_PWD,
+      required bool discount_Spl}) = _$_ItemVariant;
 
   factory _ItemVariant.fromJson(Map<String, dynamic> json) =
       _$_ItemVariant.fromJson;
@@ -1675,30 +1670,31 @@ abstract class _ItemVariant implements ItemVariant {
   @override
   String get id => throw _privateConstructorUsedError;
   @override
-  String get itemId => throw _privateConstructorUsedError;
+  String get prodID => throw _privateConstructorUsedError;
   @override
-  String get productVariantName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
-  double get productVariantPrice => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   @override
-  double get productVariantCost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
   @override
-  double? get productVariantDiscount => throw _privateConstructorUsedError;
+  double get discount => throw _privateConstructorUsedError;
   @override
-  bool get isProductVariantDiscount => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @override
-  String? get productVariantDescription => throw _privateConstructorUsedError;
+  String get prodCode => throw _privateConstructorUsedError;
   @override
-  String get productVariantCode => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  @override // required double productVariantTax,
+// required bool isProductVariantTax,
+// String? internalNote,
+  String? get inventoryLink => throw _privateConstructorUsedError;
   @override
-  double get productVariantTax => throw _privateConstructorUsedError;
+  bool get discount_SC => throw _privateConstructorUsedError;
   @override
-  bool get isProductVariantTax => throw _privateConstructorUsedError;
+  bool get discount_PWD => throw _privateConstructorUsedError;
   @override
-  String? get internalNote => throw _privateConstructorUsedError;
-  @override
-  Map<String, bool> get productVariantDiscountType =>
-      throw _privateConstructorUsedError;
+  bool get discount_Spl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ItemVariantCopyWith<_ItemVariant> get copyWith =>
@@ -1716,15 +1712,15 @@ class _$ItemTearOff {
   _Item call(
       {required String id,
       String? productName,
-      String? productDescription,
+      String? description,
       String? productCode,
-      String? categoryId}) {
+      String? category}) {
     return _Item(
       id: id,
       productName: productName,
-      productDescription: productDescription,
+      description: description,
       productCode: productCode,
-      categoryId: categoryId,
+      category: category,
     );
   }
 
@@ -1740,9 +1736,9 @@ const $Item = _$ItemTearOff();
 mixin _$Item {
   String get id => throw _privateConstructorUsedError;
   String? get productName => throw _privateConstructorUsedError;
-  String? get productDescription => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   String? get productCode => throw _privateConstructorUsedError;
-  String? get categoryId => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1756,9 +1752,9 @@ abstract class $ItemCopyWith<$Res> {
   $Res call(
       {String id,
       String? productName,
-      String? productDescription,
+      String? description,
       String? productCode,
-      String? categoryId});
+      String? category});
 }
 
 /// @nodoc
@@ -1773,9 +1769,9 @@ class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? productName = freezed,
-    Object? productDescription = freezed,
+    Object? description = freezed,
     Object? productCode = freezed,
-    Object? categoryId = freezed,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -1786,17 +1782,17 @@ class _$ItemCopyWithImpl<$Res> implements $ItemCopyWith<$Res> {
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String?,
-      productDescription: productDescription == freezed
-          ? _value.productDescription
-          : productDescription // ignore: cast_nullable_to_non_nullable
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       productCode: productCode == freezed
           ? _value.productCode
           : productCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: categoryId == freezed
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1810,9 +1806,9 @@ abstract class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   $Res call(
       {String id,
       String? productName,
-      String? productDescription,
+      String? description,
       String? productCode,
-      String? categoryId});
+      String? category});
 }
 
 /// @nodoc
@@ -1828,9 +1824,9 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? productName = freezed,
-    Object? productDescription = freezed,
+    Object? description = freezed,
     Object? productCode = freezed,
-    Object? categoryId = freezed,
+    Object? category = freezed,
   }) {
     return _then(_Item(
       id: id == freezed
@@ -1841,17 +1837,17 @@ class __$ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res>
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String?,
-      productDescription: productDescription == freezed
-          ? _value.productDescription
-          : productDescription // ignore: cast_nullable_to_non_nullable
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String?,
       productCode: productCode == freezed
           ? _value.productCode
           : productCode // ignore: cast_nullable_to_non_nullable
               as String?,
-      categoryId: categoryId == freezed
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -1863,9 +1859,9 @@ class _$_Item implements _Item {
   _$_Item(
       {required this.id,
       this.productName,
-      this.productDescription,
+      this.description,
       this.productCode,
-      this.categoryId});
+      this.category});
 
   factory _$_Item.fromJson(Map<String, dynamic> json) =>
       _$_$_ItemFromJson(json);
@@ -1875,15 +1871,15 @@ class _$_Item implements _Item {
   @override
   final String? productName;
   @override
-  final String? productDescription;
+  final String? description;
   @override
   final String? productCode;
   @override
-  final String? categoryId;
+  final String? category;
 
   @override
   String toString() {
-    return 'Item(id: $id, productName: $productName, productDescription: $productDescription, productCode: $productCode, categoryId: $categoryId)';
+    return 'Item(id: $id, productName: $productName, description: $description, productCode: $productCode, category: $category)';
   }
 
   @override
@@ -1895,15 +1891,15 @@ class _$_Item implements _Item {
             (identical(other.productName, productName) ||
                 const DeepCollectionEquality()
                     .equals(other.productName, productName)) &&
-            (identical(other.productDescription, productDescription) ||
+            (identical(other.description, description) ||
                 const DeepCollectionEquality()
-                    .equals(other.productDescription, productDescription)) &&
+                    .equals(other.description, description)) &&
             (identical(other.productCode, productCode) ||
                 const DeepCollectionEquality()
                     .equals(other.productCode, productCode)) &&
-            (identical(other.categoryId, categoryId) ||
+            (identical(other.category, category) ||
                 const DeepCollectionEquality()
-                    .equals(other.categoryId, categoryId)));
+                    .equals(other.category, category)));
   }
 
   @override
@@ -1911,9 +1907,9 @@ class _$_Item implements _Item {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(productName) ^
-      const DeepCollectionEquality().hash(productDescription) ^
+      const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(productCode) ^
-      const DeepCollectionEquality().hash(categoryId);
+      const DeepCollectionEquality().hash(category);
 
   @JsonKey(ignore: true)
   @override
@@ -1930,9 +1926,9 @@ abstract class _Item implements Item {
   factory _Item(
       {required String id,
       String? productName,
-      String? productDescription,
+      String? description,
       String? productCode,
-      String? categoryId}) = _$_Item;
+      String? category}) = _$_Item;
 
   factory _Item.fromJson(Map<String, dynamic> json) = _$_Item.fromJson;
 
@@ -1941,11 +1937,11 @@ abstract class _Item implements Item {
   @override
   String? get productName => throw _privateConstructorUsedError;
   @override
-  String? get productDescription => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @override
   String? get productCode => throw _privateConstructorUsedError;
   @override
-  String? get categoryId => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ItemCopyWith<_Item> get copyWith => throw _privateConstructorUsedError;

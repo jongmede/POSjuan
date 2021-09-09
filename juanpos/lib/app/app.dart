@@ -1,4 +1,5 @@
 import 'package:juanpos/api/firestore_api.dart';
+import 'package:juanpos/api/firestore_storage_api.dart';
 import 'package:juanpos/screens/business/business_view.dart';
 import 'package:juanpos/screens/business/create_business/create_business_view.dart';
 import 'package:juanpos/screens/create_account/with_email/create_account_view.dart';
@@ -17,7 +18,9 @@ import 'package:juanpos/screens/pages/more/supplier/update_supplier/update_suppl
 import 'package:juanpos/screens/startup/startup_view.dart';
 import 'package:juanpos/services/business_service.dart';
 import 'package:juanpos/services/category_service.dart';
+import 'package:juanpos/services/image_picker_service.dart';
 import 'package:juanpos/services/items_service.dart';
+import 'package:juanpos/services/upload_service.dart';
 import 'package:juanpos/services/user_creation_service.dart';
 import 'package:juanpos/services/user_service.dart';
 import 'package:juanpos/services/variant_service.dart';
@@ -54,7 +57,10 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: BusinessService),
     LazySingleton(classType: ItemService),
     LazySingleton(classType: ItemVariantService),
+    LazySingleton(classType: ImagePickerService),
     Singleton(classType: FirebaseAuthenticationService),
+    Singleton(classType: FirestoreStorageApi),
+    Singleton(classType: UploadService),
   ],
   logger: StackedLogger(),
 )

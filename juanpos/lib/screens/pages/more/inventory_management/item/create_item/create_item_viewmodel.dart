@@ -39,9 +39,9 @@ class CreateItemViewModel extends FormViewModel {
       this.item = Item(
           id: "",
           productName: "",
-          productDescription: "",
+          description: "",
           productCode: "",
-          categoryId: "");
+          category: "");
     }
   }
 
@@ -57,7 +57,7 @@ class CreateItemViewModel extends FormViewModel {
           throwException: true);
       if (_categoryService.categories != null && item!.id.isNotEmpty) {
         category = _categoryService.categories!
-            .firstWhere((element) => element.id == item!.categoryId);
+            .firstWhere((element) => element.categoryName == item!.category);
         notifyListeners();
       }
     } on FirestoreApiException catch (e) {
@@ -88,9 +88,9 @@ class CreateItemViewModel extends FormViewModel {
     final result = await _itemService.createItem(
         item: item!.copyWith(
           productName: productNameValue!,
-          productDescription: productDescriptionValue!,
+          description: productDescriptionValue!,
           productCode: productCodeValue!,
-          categoryId: category!.id,
+          category: category!.categoryName,
         ),
         variants: variants,
         user: _userService.currentUser);
@@ -101,9 +101,9 @@ class CreateItemViewModel extends FormViewModel {
     final result = await _itemService.updateItem(
         newValue: item!.copyWith(
             productName: productNameValue!,
-            productDescription: productDescriptionValue!,
+            description: productDescriptionValue!,
             productCode: productCodeValue!,
-            categoryId: category!.id),
+            category: category!.categoryName),
         user: _userService.currentUser);
     validateResult(result);
   }
@@ -160,9 +160,15 @@ class CreateItemViewModel extends FormViewModel {
   }
 
   toUpdateVariantView(ItemVariant variant) async {
+    variants.remove(variant);
     final result = await navigationService.navigateTo(
         Routes.createItemVariantView,
         arguments: CreateItemVariantViewArguments(variant: variant));
+    if (result != null && (result as ItemVariant).id.isEmpty) {
+      log.i("result:$result");
+      variants.add(result);
+      notifyListeners();
+    }
   }
 
   toCreateCategoryView() =>

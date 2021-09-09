@@ -1,4 +1,5 @@
 import 'package:juanpos/api/firestore_api.dart';
+import 'package:juanpos/api/firestore_storage_api.dart';
 import 'package:juanpos/app/app.locator.dart';
 import 'package:juanpos/app/app.logger.dart';
 import 'package:juanpos/model/application_models.dart';
@@ -7,6 +8,7 @@ class ItemService {
   final log = getLogger('ItemService');
 
   final _firestoreApi = locator<FirestoreApi>();
+  final _firestorageApi = locator<FirestoreStorageApi>();
 
   Item? currentItem;
 

@@ -36,25 +36,27 @@ dependencies:
 
   stacked_firebase_auth: ^0.2.10
 
-  firebase_core: ^1.5.0
-  cloud_firestore: ^2.5.0
-  firebase_auth: ^3.0.2
+  firebase_core: ^1.6.0
+  cloud_firestore: ^2.5.1
+  firebase_auth: ^3.1.0
+  firebase_storage: ^10.0.3
 
   freezed_annotation:
   json_annotation:
 
   auth_buttons: ^1.0.1+4
 
+  image_picker: ^0.8.4
+
   box_ui:
     path: ../box_ui/
-  
-  change_app_package_name: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   stacked_generator:
+  change_app_package_name: ^1.0.0
   build_runner:
 
   freezed:

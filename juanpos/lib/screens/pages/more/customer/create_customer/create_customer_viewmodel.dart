@@ -36,7 +36,7 @@ class CreateCustomerViewModel extends FormViewModel {
   Future saveData() async {
     log.i('valued:$formValueMap');
     if (!validateInputs()) {
-      print("not any value empry");
+      print(" not any value empry");
       setValidationMessage("Fields can't be empty");
       notifyListeners();
       return;

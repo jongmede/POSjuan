@@ -1,10 +1,74 @@
+import 'dart:io';
+
 import 'package:juanpos/app/app.logger.dart';
 import 'package:juanpos/exceptions/firestore_api_exception.dart';
 import 'package:juanpos/model/application_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FirestoreApi {
   final log = getLogger('FirestoreApi');
+
+  FirebaseStorage storage = FirebaseStorage.instance;
+
+  Future<String> uploadProductImage(
+      {required File file, required Reference ref}) async {
+    try {
+      await ref.putFile(file);
+      return ref.getDownloadURL();
+    } catch (e) {
+      throw FirestoreApiException(
+        devDetails: "$e",
+        message: "Unable to upload file ${file.path}",
+      );
+    }
+  }
+
+  Future deleteProductImage({required String userId,
+    required String prodID,
+    String variantId = ""}) async {
+
+    try {
+      Reference ref;
+      if(variantId.isEmpty) {
+        ref = storage.ref("Users/" + userId + "/" + prodID + "/" + variantId);
+        final list = await ref.listAll();
+        for(var item in list.items){
+          log.d("item:${item.fullPath}");
+          await item.delete();
+        }
+      } else {
+        ref = storage.ref("Users/" + userId + "/" + prodID);
+        final list = await ref.listAll();
+        for(var item in list.items){
+          final variantList = await item.listAll();
+          for(var variant in variantList.items){
+            log.d("item:${variant.fullPath}");
+            await variant.delete();
+          }
+        }
+      }
+    } catch (e) {
+      throw FirestoreApiException(
+        devDetails: "$e",
+        message: "Unable to delete file",
+      );
+    }
+  }
+
+  Reference getFileReferenceFromFirestore(
+      {required File file,
+      required String userId,
+      required String prodID,
+      required String variantId}) {
+    return storage.ref("Users/"+userId +
+        "/" +
+        prodID +
+        "/" +
+        variantId +
+        "/" +
+        file.path.split('/').last);
+  }
 
   final CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
@@ -421,7 +485,7 @@ class FirestoreApi {
 
   Future<List<Item>?> syncItem({required UserDetails user}) async {
     try {
-      final userDB = usersCollection.doc(user.id).collection("items");
+      final userDB = usersCollection.doc(user.id).collection("Product");
 
       final itemDocuments = await userDB.get();
 
@@ -444,7 +508,7 @@ class FirestoreApi {
     log.i('item:$item');
 
     try {
-      final userDB = usersCollection.doc(user.id).collection("items");
+      final userDB = usersCollection.doc(user.id).collection("Product");
       final userDocument =
           await userDB.where('productCode', isEqualTo: item.productCode).get();
 
@@ -456,9 +520,27 @@ class FirestoreApi {
       final itemDoc = userDB.doc();
       await itemDoc.set(item.copyWith(id: itemDoc.id).toJson());
 
-      for(var variant in variants){
-        final variantDoc = itemDoc.collection("variants").doc();
-        await variantDoc.set(variant.copyWith(id: variantDoc.id, itemId: itemDoc.id).toJson());
+      for (var variant in variants) {
+        final variantDoc = itemDoc.collection("ProductAttribute").doc();
+        String? url;
+
+        if (variant.image != null) {
+          final file = File(variant.image!);
+
+          Reference ref = getFileReferenceFromFirestore(
+              file: file, userId: user.id, prodID: itemDoc.id, variantId: variantDoc.id);
+
+          log.d("ref:$ref");
+          url = await uploadProductImage(file: file, ref: ref);
+          log.d("url:$url");
+        }
+
+        var v = variant.copyWith(id: variantDoc.id, prodID: itemDoc.id, image: url.toString());
+
+        log.d("v:$v");
+
+        await variantDoc.set(
+            v.toJson());
       }
 
       log.v('item:$item created at ${userDB.path}');
@@ -467,7 +549,7 @@ class FirestoreApi {
       return itemDocuments.docs.map((e) => Item.fromJson(e.data())).toList();
     } catch (error) {
       throw FirestoreApiException(
-        message: 'Failed to create new item',
+        message: 'Failed to create new product',
         devDetails: '$error',
       );
     }
@@ -478,8 +560,9 @@ class FirestoreApi {
     log.i('item:$item');
 
     try {
-      final userDB = usersCollection.doc(user.id).collection("items");
+      final userDB = usersCollection.doc(user.id).collection("Product");
 
+      await deleteProductImage(userId: user.id, prodID: item.id);
       await userDB.doc(item.id).delete();
 
       log.v('item:$item deleted at ${userDB.path}');
@@ -499,7 +582,7 @@ class FirestoreApi {
     log.i('item:$item');
 
     try {
-      final userDB = usersCollection.doc(user.id).collection("items");
+      final userDB = usersCollection.doc(user.id).collection("Product");
 
       await userDB.doc(item.id).update(item.toJson());
 
@@ -518,9 +601,9 @@ class FirestoreApi {
     try {
       final userDB = usersCollection
           .doc(user.id)
-          .collection("items")
+          .collection("Product")
           .doc(item.id)
-          .collection("variants");
+          .collection("ProductAttribute");
 
       final variantDocuments = await userDB.get();
 
@@ -546,7 +629,8 @@ class FirestoreApi {
 
     try {
       if (item == null || item.id.isEmpty) {
-        final itemsDoc = usersCollection.doc(user.id).collection("items").doc();
+        final itemsDoc =
+            usersCollection.doc(user.id).collection("Product").doc();
 
         item = Item(id: itemsDoc.id);
 
@@ -554,16 +638,15 @@ class FirestoreApi {
       }
       final userDB = usersCollection
           .doc(user.id)
-          .collection("items")
+          .collection("Product")
           .doc(item.id)
-          .collection("variants");
+          .collection("ProductAttribute");
       final userDocument = await userDB
-          .where('productVariantCode', isEqualTo: variant.productVariantCode)
+          .where('productVariantCode', isEqualTo: variant.prodCode)
           .get();
 
       if (userDocument.size > 0) {
-        log.v(
-            'We have item with id ${variant.productVariantCode} in our database');
+        log.v('We have item with id ${variant.prodCode} in our database');
         return null;
       }
       final variantDoc = userDB.doc();
@@ -584,17 +667,17 @@ class FirestoreApi {
   }
 
   Future<List<ItemVariant>?> deleteItemVariant(
-      {required ItemVariant variant,
-      required UserDetails user}) async {
+      {required ItemVariant variant, required UserDetails user}) async {
     log.i('variant:$variant');
 
     try {
       final userDB = usersCollection
           .doc(user.id)
-          .collection("items")
-          .doc(variant.itemId)
-          .collection("variants");
+          .collection("Product")
+          .doc(variant.prodID)
+          .collection("ProductAttribute");
 
+      await deleteProductImage(userId: user.id, prodID: variant.prodID, variantId: variant.id);
       await userDB.doc(variant.id).delete();
 
       log.v('variant:$variant deleted at ${userDB.path}');
@@ -611,17 +694,24 @@ class FirestoreApi {
     }
   }
 
-  Future<List<ItemVariant>?> updateItemVariant(
-      {required ItemVariant variant,
-      required UserDetails user,}) async {
+  Future<List<ItemVariant>?> updateItemVariant({
+    required ItemVariant variant,
+    required UserDetails user,
+    required isImageChanged
+  }) async {
     log.i('variant:$variant');
 
     try {
       final userDB = usersCollection
           .doc(user.id)
-          .collection("items")
-          .doc(variant.itemId)
-          .collection("variants");
+          .collection("Product")
+          .doc(variant.prodID)
+          .collection("ProductAttribute");
+
+      if(isImageChanged){
+        await deleteProductImage(userId: user.id, prodID: variant.prodID, variantId: variant.id);
+        await getFileReferenceFromFirestore(file: File(variant.image!), userId: user.id, prodID: variant.prodID, variantId: variant.id).putFile(File(variant.image!));
+      }
 
       await userDB.doc(variant.id).update(variant.toJson());
 

@@ -2,7 +2,7 @@ import 'package:juanpos/app/app.locator.dart';
 import 'package:juanpos/app/app.logger.dart';
 import 'package:juanpos/app/app.router.dart';
 import 'package:juanpos/screens/pages/more/more_view.dart';
-import 'package:juanpos/services/user_service.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';

@@ -24,7 +24,6 @@ class LoginViewModel extends AuthenticationViewModel {
 
   @override
   UserDetails getUserDetails() {
-    // TODO: implement getUserDetails
-    throw UnimplementedError();
+    return  UserDetails(id: "", name: "");
   }
 }

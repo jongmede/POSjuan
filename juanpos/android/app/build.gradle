@@ -29,15 +29,6 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
 
-    lintOptions {
-        checkReleaseBuilds false
-        disable 'InvalidPackage'
-    }
-
-    aaptOptions {
-        noCompress "tflite"
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -56,18 +47,6 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    sourceSets {
-        main {
-            java {
-                srcDirs 'src/main/java', 'src/main/java/workers'
-            }
         }
     }
 }

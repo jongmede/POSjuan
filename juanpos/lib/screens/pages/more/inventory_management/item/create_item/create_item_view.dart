@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:juanpos/model/application_models.dart';
 import 'package:juanpos/screens/pages/more/inventory_management/category/create_category/create_category_view.dart';
 import 'package:juanpos/screens/pages/more/inventory_management/item/variant/delete_variant/delete_variant_view.dart';
@@ -32,9 +34,9 @@ class CreateItemView extends StatelessWidget with $CreateItemView {
         if (item != null) {
           model.syncVariant();
           productNameController.text = item!.productName!;
-          productDescriptionController.text = item!.productDescription!;
+          productDescriptionController.text = item!.description!;
           productCodeController.text = item!.productCode!;
-          categoryIdController.text = item!.categoryId!;
+          categoryIdController.text = item!.category!;
         }
       },
       builder: (context, model, child) => Scaffold(
@@ -55,14 +57,6 @@ class CreateItemView extends StatelessWidget with $CreateItemView {
                 if (model.validationMessage != null) verticalSpaceRegular,
                 Row(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          shape: BoxShape.circle),
-                      child: Image.asset("asset/images/Add Image.png"),
-                    ),
-                    horizontalSpaceSmall,
                     Expanded(
                       child: PopupMenuTheme(
                         data: PopupMenuThemeData(),
@@ -214,16 +208,36 @@ class CreateItemView extends StatelessWidget with $CreateItemView {
           decoration: BoxDecoration(border: Border.all()),
           child: Row(children: [
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      border: Border.all(), shape: BoxShape.circle),
-                  child: Image.asset("asset/images/Add Image.png"),
-                )),
+              padding: const EdgeInsets.all(8.0),
+              child: variant.image == null || variant.image!.isEmpty ? Container(
+                padding: EdgeInsets.all(8),
+                decoration:
+                    BoxDecoration(border: Border.all(), shape: BoxShape.circle),
+                child: Image.asset("asset/images/Add Image.png"),
+              ) : variant.id.isEmpty ? ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Image.file(
+                    File(variant.image!),
+                    width: 48,
+                    height: 48,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ) : ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.network(
+                  variant.image!,
+                  width: 48,
+                  height: 48,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             Expanded(
               child: Text(
-                variant.productVariantName,
+                variant.name,
                 style: GoogleFonts.roboto(
                     fontSize: 18, fontWeight: FontWeight.normal),
               ),

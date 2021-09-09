@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:juanpos/app/app.locator.dart';
 import 'package:juanpos/app/app.logger.dart';
 import 'package:juanpos/exceptions/firestore_api_exception.dart';
 import 'package:juanpos/model/application_models.dart';
-import 'package:juanpos/services/items_service.dart';
+import 'package:juanpos/services/image_picker_service.dart';
 import 'package:juanpos/services/variant_service.dart';
 import 'package:juanpos/services/user_service.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -15,9 +18,12 @@ class CreateItemVariantViewModel extends FormViewModel {
   final navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _itemVariantService = locator<ItemVariantService>();
+  final _imagePicker = locator<ImagePickerService>();
 
   bool isDiscount = false;
+  bool isImageChanged = false;
   bool isTax = false;
+  XFile? selectedImage;
   Map<String, bool> discountCategory = {
     "SENIOR CITIZEN": false,
     "PWD": false,
@@ -34,17 +40,21 @@ class CreateItemVariantViewModel extends FormViewModel {
   }
 
   Future<void> updateVariant() async {
-    final result = await _itemVariantService.updateItemVariant(newValue: variant!.copyWith(productVariantName: productVariantNameValue!,
-        productVariantPrice: double.parse(productVariantPriceValue!),
-        productVariantCost: double.parse(productVariantCostValue!),
-        productVariantDescription: productVariantDescriptionValue,
-        productVariantDiscountType: discountCategory,
-        productVariantDiscount: isDiscount ? 20.0 : 0,
-        isProductVariantDiscount: isDiscount,
-        productVariantCode: productVariantCodeValue!,
-        isProductVariantTax: isTax,
-        productVariantTax: isTax ? double.parse(productVariantTaxValue!) : 0,
-        internalNote: productVariantInternalNoteValue), user: _userService.currentUser);
+    final result = await _itemVariantService.updateItemVariant(
+        newValue: variant!.copyWith(
+            name: productVariantNameValue!,
+            price: double.parse(productVariantPriceValue!),
+            cost: double.parse(productVariantCostValue!),
+            description: productVariantDescriptionValue,
+            discount: isDiscount ? 20.0 : 0,
+            prodCode: productVariantCodeValue!,
+            discount_Spl: discountCategory["SPECIAL"]!,
+            discount_PWD: discountCategory["PWD"]!,
+            discount_SC: discountCategory["SENIOR CITIZEN"]!,
+            image: selectedImage != null && selectedImage!.path.isImageFileName
+                ? selectedImage!.path
+                : null),
+        user: _userService.currentUser, isImageChanged: isImageChanged);
     validateResult(result);
   }
 
@@ -55,25 +65,26 @@ class CreateItemVariantViewModel extends FormViewModel {
       setValidationMessage("Fields can't be empty");
       return;
     }
-    if (variant == null) {
+    if (variant == null || variant!.id.isEmpty) {
       variant = ItemVariant(
           id: "",
-          itemId: "",
-          productVariantName: productVariantNameValue!,
-          productVariantPrice: double.parse(productVariantPriceValue!),
-          productVariantCost: double.parse(productVariantCostValue!),
-          productVariantDescription: productVariantDescriptionValue,
-          productVariantDiscountType: discountCategory,
-          productVariantDiscount: isDiscount ? 20.0 : 0,
-          isProductVariantDiscount: isDiscount,
-          productVariantCode: productVariantCodeValue!,
-          isProductVariantTax: isTax,
-          productVariantTax: isTax ? double.parse(productVariantTaxValue!) : 0,
-          internalNote: productVariantInternalNoteValue);
+          prodID: "",
+          name: productVariantNameValue!,
+          price: double.parse(productVariantPriceValue!),
+          cost: double.parse(productVariantCostValue!),
+          description: productVariantDescriptionValue,
+          discount: isDiscount ? 20.0 : 0,
+          prodCode: productVariantCodeValue!,
+          discount_Spl: discountCategory["SPECIAL"]!,
+          discount_PWD: discountCategory["PWD"]!,
+          discount_SC: discountCategory["SENIOR CITIZEN"]!,
+          image: selectedImage != null && selectedImage!.path.isImageFileName
+              ? selectedImage!.path
+              : null);
       validateResult(true);
     } else {
       try {
-          await runBusyFuture(updateVariant(), throwException: true);
+        await runBusyFuture(updateVariant(), throwException: true);
       } on FirestoreApiException catch (e) {
         log.e(e.toString());
         setValidationMessage(e.toString());
@@ -82,24 +93,25 @@ class CreateItemVariantViewModel extends FormViewModel {
   }
 
   bool validateInputs() {
-    bool tax = false;
+    /*bool tax = false;
 
     if (isTax) {
       tax =
           productVariantTaxValue != null && productVariantTaxValue!.isNotEmpty;
     } else {
       tax = true;
-    }
+    }*/
 
     return productVariantNameValue != null &&
-        productVariantNameValue!.isNotEmpty &&
-        productVariantPriceValue != null &&
-        productVariantPriceValue!.isNotEmpty &&
-        productVariantCostValue != null &&
-        productVariantCostValue!.isNotEmpty &&
-        productVariantCodeValue != null &&
-        productVariantCodeValue!.isNotEmpty &&
-        tax;
+            productVariantNameValue!.isNotEmpty &&
+            productVariantPriceValue != null &&
+            productVariantPriceValue!.isNotEmpty &&
+            productVariantCostValue != null &&
+            productVariantCostValue!.isNotEmpty &&
+            productVariantCodeValue != null &&
+            productVariantCodeValue!.isNotEmpty /*&&
+        tax*/
+        ;
   }
 
   void validateResult(bool result) {
@@ -107,6 +119,38 @@ class CreateItemVariantViewModel extends FormViewModel {
       setValidationMessage("Supplier already exists");
     } else {
       navigationService.back(result: variant);
+    }
+  }
+
+  Future selectImageFromGallery() async {
+    try {
+      final result = await runBusyFuture(_imagePicker.selectImageFromGallery(),
+          throwException: true);
+      if (result != null) {
+        selectedImage = result;
+        isImageChanged = true;
+        notifyListeners();
+      }
+    } on FirestoreApiException catch (e) {
+      log.e(e.toString());
+      setValidationMessage(e.toString());
+    }
+  }
+
+  Future takeImageFromCamera() async {
+    try {
+      log.d("Loading image");
+      final result = await runBusyFuture(_imagePicker.takeImageFromCamera(),
+          throwException: true);
+      log.d("image:$result");
+      if (result != null) {
+        selectedImage = result;
+        isImageChanged = true;
+        notifyListeners();
+      }
+    } on FirestoreApiException catch (e) {
+      log.e(e.toString());
+      setValidationMessage(e.toString());
     }
   }
 }

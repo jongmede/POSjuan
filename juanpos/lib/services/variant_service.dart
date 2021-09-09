@@ -30,10 +30,10 @@ class ItemVariantService {
   }
 
   Future<bool> updateItemVariant(
-      {required ItemVariant newValue, required UserDetails user}) async {
+      {required ItemVariant newValue, required UserDetails user, required bool isImageChanged}) async {
     log.i('customer:$user');
     final result =
-    await _firestoreApi.updateItemVariant(variant: newValue, user: user);
+    await _firestoreApi.updateItemVariant(variant: newValue, user: user, isImageChanged: isImageChanged);
     if (result == null)
       return false;
     else {

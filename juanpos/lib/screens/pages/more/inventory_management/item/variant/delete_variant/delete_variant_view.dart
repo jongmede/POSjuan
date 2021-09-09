@@ -53,7 +53,7 @@ class DeleteVariantView extends StatelessWidget {
                             ),
                           if (model.validationMessage != null)
                             verticalSpaceRegular,
-                          Text("Are sure? You want to delete ${variant.productVariantName}", style: GoogleFonts.roboto(
+                          Text("Are sure? You want to delete ${variant.name}", style: GoogleFonts.roboto(
                             fontWeight: FontWeight.normal,
                             fontSize: 16,
                           ),),

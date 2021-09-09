@@ -106,54 +106,52 @@ Map<String, dynamic> _$_$_BusinessToJson(_$_Business instance) =>
 _$_ItemVariant _$_$_ItemVariantFromJson(Map<String, dynamic> json) {
   return _$_ItemVariant(
     id: json['id'] as String,
-    itemId: json['itemId'] as String,
-    productVariantName: json['productVariantName'] as String,
-    productVariantPrice: (json['productVariantPrice'] as num).toDouble(),
-    productVariantCost: (json['productVariantCost'] as num).toDouble(),
-    productVariantDiscount:
-        (json['productVariantDiscount'] as num?)?.toDouble(),
-    isProductVariantDiscount: json['isProductVariantDiscount'] as bool,
-    productVariantDescription: json['productVariantDescription'] as String?,
-    productVariantCode: json['productVariantCode'] as String,
-    productVariantTax: (json['productVariantTax'] as num).toDouble(),
-    isProductVariantTax: json['isProductVariantTax'] as bool,
-    internalNote: json['internalNote'] as String?,
-    productVariantDiscountType:
-        Map<String, bool>.from(json['productVariantDiscountType'] as Map),
+    prodID: json['prodID'] as String,
+    name: json['name'] as String,
+    price: (json['price'] as num).toDouble(),
+    cost: (json['cost'] as num).toDouble(),
+    discount: (json['discount'] as num).toDouble(),
+    description: json['description'] as String?,
+    prodCode: json['prodCode'] as String,
+    image: json['image'] as String?,
+    inventoryLink: json['inventoryLink'] as String?,
+    discount_SC: json['discount_SC'] as bool,
+    discount_PWD: json['discount_PWD'] as bool,
+    discount_Spl: json['discount_Spl'] as bool,
   );
 }
 
 Map<String, dynamic> _$_$_ItemVariantToJson(_$_ItemVariant instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'itemId': instance.itemId,
-      'productVariantName': instance.productVariantName,
-      'productVariantPrice': instance.productVariantPrice,
-      'productVariantCost': instance.productVariantCost,
-      'productVariantDiscount': instance.productVariantDiscount,
-      'isProductVariantDiscount': instance.isProductVariantDiscount,
-      'productVariantDescription': instance.productVariantDescription,
-      'productVariantCode': instance.productVariantCode,
-      'productVariantTax': instance.productVariantTax,
-      'isProductVariantTax': instance.isProductVariantTax,
-      'internalNote': instance.internalNote,
-      'productVariantDiscountType': instance.productVariantDiscountType,
+      'prodID': instance.prodID,
+      'name': instance.name,
+      'price': instance.price,
+      'cost': instance.cost,
+      'discount': instance.discount,
+      'description': instance.description,
+      'prodCode': instance.prodCode,
+      'image': instance.image,
+      'inventoryLink': instance.inventoryLink,
+      'discount_SC': instance.discount_SC,
+      'discount_PWD': instance.discount_PWD,
+      'discount_Spl': instance.discount_Spl,
     };
 
 _$_Item _$_$_ItemFromJson(Map<String, dynamic> json) {
   return _$_Item(
     id: json['id'] as String,
     productName: json['productName'] as String?,
-    productDescription: json['productDescription'] as String?,
+    description: json['description'] as String?,
     productCode: json['productCode'] as String?,
-    categoryId: json['categoryId'] as String?,
+    category: json['category'] as String?,
   );
 }
 
 Map<String, dynamic> _$_$_ItemToJson(_$_Item instance) => <String, dynamic>{
       'id': instance.id,
       'productName': instance.productName,
-      'productDescription': instance.productDescription,
+      'description': instance.description,
       'productCode': instance.productCode,
-      'categoryId': instance.categoryId,
+      'category': instance.category,
     };

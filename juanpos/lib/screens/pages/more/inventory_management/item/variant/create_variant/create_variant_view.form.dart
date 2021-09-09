@@ -14,8 +14,6 @@ const String ProductVariantPriceValueKey = 'productVariantPrice';
 const String ProductVariantCostValueKey = 'productVariantCost';
 const String ProductVariantDescriptionValueKey = 'productVariantDescription';
 const String ProductVariantCodeValueKey = 'productVariantCode';
-const String ProductVariantTaxValueKey = 'productVariantTax';
-const String ProductVariantInternalNoteValueKey = 'productVariantInternalNote';
 
 mixin $CreateItemVariantView on StatelessWidget {
   final TextEditingController productVariantNameController =
@@ -28,17 +26,11 @@ mixin $CreateItemVariantView on StatelessWidget {
       TextEditingController();
   final TextEditingController productVariantCodeController =
       TextEditingController();
-  final TextEditingController productVariantTaxController =
-      TextEditingController();
-  final TextEditingController productVariantInternalNoteController =
-      TextEditingController();
   final FocusNode productVariantNameFocusNode = FocusNode();
   final FocusNode productVariantPriceFocusNode = FocusNode();
   final FocusNode productVariantCostFocusNode = FocusNode();
   final FocusNode productVariantDescriptionFocusNode = FocusNode();
   final FocusNode productVariantCodeFocusNode = FocusNode();
-  final FocusNode productVariantTaxFocusNode = FocusNode();
-  final FocusNode productVariantInternalNoteFocusNode = FocusNode();
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
@@ -49,9 +41,6 @@ mixin $CreateItemVariantView on StatelessWidget {
     productVariantDescriptionController
         .addListener(() => _updateFormData(model));
     productVariantCodeController.addListener(() => _updateFormData(model));
-    productVariantTaxController.addListener(() => _updateFormData(model));
-    productVariantInternalNoteController
-        .addListener(() => _updateFormData(model));
   }
 
   /// Updates the formData on the FormViewModel
@@ -64,9 +53,6 @@ mixin $CreateItemVariantView on StatelessWidget {
             ProductVariantDescriptionValueKey:
                 productVariantDescriptionController.text,
             ProductVariantCodeValueKey: productVariantCodeController.text,
-            ProductVariantTaxValueKey: productVariantTaxController.text,
-            ProductVariantInternalNoteValueKey:
-                productVariantInternalNoteController.text,
           }),
       );
 
@@ -79,8 +65,6 @@ mixin $CreateItemVariantView on StatelessWidget {
     productVariantCostController.dispose();
     productVariantDescriptionController.dispose();
     productVariantCodeController.dispose();
-    productVariantTaxController.dispose();
-    productVariantInternalNoteController.dispose();
   }
 }
 
@@ -95,10 +79,6 @@ extension ValueProperties on FormViewModel {
       this.formValueMap[ProductVariantDescriptionValueKey];
   String? get productVariantCodeValue =>
       this.formValueMap[ProductVariantCodeValueKey];
-  String? get productVariantTaxValue =>
-      this.formValueMap[ProductVariantTaxValueKey];
-  String? get productVariantInternalNoteValue =>
-      this.formValueMap[ProductVariantInternalNoteValueKey];
 
   bool get hasProductVariantName =>
       this.formValueMap.containsKey(ProductVariantNameValueKey);
@@ -110,10 +90,6 @@ extension ValueProperties on FormViewModel {
       this.formValueMap.containsKey(ProductVariantDescriptionValueKey);
   bool get hasProductVariantCode =>
       this.formValueMap.containsKey(ProductVariantCodeValueKey);
-  bool get hasProductVariantTax =>
-      this.formValueMap.containsKey(ProductVariantTaxValueKey);
-  bool get hasProductVariantInternalNote =>
-      this.formValueMap.containsKey(ProductVariantInternalNoteValueKey);
 }
 
 extension Methods on FormViewModel {}

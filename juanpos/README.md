@@ -1,4 +1,4 @@
-# juan_pos
+# juanpos
 
 A new Flutter project.
 

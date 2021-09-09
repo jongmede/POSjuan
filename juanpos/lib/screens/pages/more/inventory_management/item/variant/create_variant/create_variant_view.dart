@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:juanpos/model/application_models.dart';
 import 'package:box_ui/box_ui.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,8 @@ import 'create_variant_viewmodel.dart';
   FormTextField(name: 'productVariantCost'),
   FormTextField(name: 'productVariantDescription'),
   FormTextField(name: 'productVariantCode'),
-  FormTextField(name: 'productVariantTax'),
-  FormTextField(name: 'productVariantInternalNote'),
+  // FormTextField(name: 'productVariantTax'),
+  // FormTextField(name: 'productVariantInternalNote'),
 ])
 class CreateItemVariantView extends StatelessWidget
     with $CreateItemVariantView {
@@ -29,23 +31,26 @@ class CreateItemVariantView extends StatelessWidget
         onModelReady: (model) {
           listenToFormUpdated(model);
           if (variant != null) {
-            productVariantNameController.text = variant!.productVariantName;
+            productVariantNameController.text = variant!.name;
             productVariantPriceController.text =
-                variant!.productVariantPrice.toString();
+                variant!.price.toString();
             productVariantCostController.text =
-                variant!.productVariantCost.toString();
+                variant!.cost.toString();
             productVariantDescriptionController.text =
-                variant!.productVariantDescription == null
+                variant!.description == null
                     ? ""
-                    : variant!.productVariantDescription!;
-            productVariantCodeController.text = variant!.productVariantCode;
-            productVariantTaxController.text =
+                    : variant!.description!;
+            productVariantCodeController.text = variant!.prodCode;
+            /*productVariantTaxController.text =
                 variant!.productVariantTax.toString();
             productVariantInternalNoteController.text =
                 variant!.internalNote == null ? "" : variant!.internalNote!;
             model.isDiscount = variant!.isProductVariantDiscount;
-            model.isTax = variant!.isProductVariantTax;
-            model.discountCategory = variant!.productVariantDiscountType;
+            model.isTax = variant!.isProductVariantTax;*/
+            model.discountCategory["SENIOR CITIZEN"] = variant!.discount_SC;
+            model.discountCategory["PWD"] = variant!.discount_PWD;
+            model.discountCategory["SPECIAL"] = variant!.discount_Spl;
+
           }
         },
         builder: (context, model, child) => Scaffold(
@@ -64,12 +69,31 @@ class CreateItemVariantView extends StatelessWidget
                           color: Colors.red,
                         ),
                       if (model.validationMessage != null) verticalSpaceRegular,
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Variant Name',
-                          border: OutlineInputBorder(),
-                        ),
-                        controller: productVariantNameController,
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              showDialog(context: context, builder: (context) => buildUploadImage(context, model));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black),
+                                  shape: BoxShape.circle),
+                              child: model.selectedImage == null ? Image.asset("asset/images/Add Image.png") : Image.file(File(model.selectedImage!.path), width: 32, height: 32,),
+                            ),
+                          ),
+                          horizontalSpaceSmall,
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                labelText: 'Variant Name',
+                                border: OutlineInputBorder(),
+                              ),
+                              controller: productVariantNameController,
+                            ),
+                          ),
+                        ],
                       ),
                       verticalSpaceRegular,
                       TextField(
@@ -171,7 +195,7 @@ class CreateItemVariantView extends StatelessWidget
                         ],
                       ),
                       verticalSpaceRegular,
-                      Row(
+                      /*Row(
                         children: [
                           Expanded(
                             child: TextField(
@@ -210,7 +234,7 @@ class CreateItemVariantView extends StatelessWidget
                         ),
                         controller: productVariantInternalNoteController,
                       ),
-                      verticalSpaceRegular,
+                      verticalSpaceRegular,*/
                       BoxButton(
                         title: "SAVE",
                         busy: model.isBusy,
@@ -223,5 +247,64 @@ class CreateItemVariantView extends StatelessWidget
                 ),
               ),
             ));
+  }
+
+  Widget buildUploadImage(
+      BuildContext context, CreateItemVariantViewModel model) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: Icon(Icons.close))
+                        ],
+                      ),
+                      verticalSpaceTiny,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                        child: BoxButton.outline(
+                          title: "Gallery",
+                          color: Colors.black,
+                          onTap: () {
+                            print("click");
+                            Navigator.of(context).pop();
+                            model.selectImageFromGallery();
+                          },
+                        ),
+                      ),
+                      verticalSpaceMedium,
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+                        child: BoxButton.outline(
+                          title: "Camera",
+                          color: Colors.black,
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            model.takeImageFromCamera();
+                          },
+                        ),
+                      ),
+                      verticalSpaceMedium
+                    ],
+                  ),
+                ),
+              ),
+        ),
+      ),
+    );
   }
 }

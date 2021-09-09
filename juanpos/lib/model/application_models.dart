@@ -73,18 +73,21 @@ abstract class Business with _$Business {
 abstract class ItemVariant with _$ItemVariant {
   factory ItemVariant({
     required String id,
-    required String itemId,
-    required String productVariantName,
-    required double productVariantPrice,
-    required double productVariantCost,
-    required double? productVariantDiscount,
-    required bool isProductVariantDiscount,
-    String? productVariantDescription,
-    required String productVariantCode,
-    required double productVariantTax,
-    required bool isProductVariantTax,
-    String? internalNote,
-    required Map<String, bool> productVariantDiscountType,
+    required String prodID,
+    required String name,
+    required double price,
+    required double cost,
+    required double discount,
+    String? description,
+    required String prodCode,
+    String? image,
+    // required double productVariantTax,
+    // required bool isProductVariantTax,
+    // String? internalNote,
+    String? inventoryLink,
+    required bool discount_SC,
+    required bool discount_PWD,
+    required bool discount_Spl,
   }) = _ItemVariant;
 
   factory ItemVariant.fromJson(Map<String, dynamic> json) =>
@@ -96,9 +99,9 @@ abstract class Item with _$Item {
   factory Item({
     required String id,
     String? productName,
-    String? productDescription,
+    String? description,
     String? productCode,
-    String? categoryId,
+    String? category,
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
